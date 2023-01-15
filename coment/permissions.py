@@ -1,9 +1,8 @@
 from rest_framework import permissions
 
-class BlogPermisstion(permissions.BasePermission):
-    def has_permisstion_view(self, request, view, obj):
-        if request.method in permissions.SAFT_METHODS and obj.author == request.user:
+class ComentPermission(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
             return True
         else:
-            return request.user
-
+            return bool(request.user.is_authenticated and request.user == obj.author)

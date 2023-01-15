@@ -20,5 +20,3 @@ class Coments(models.Model):
     blog = models.ForeignKey(Blog, verbose_name="Blog", 
         related_name= 'blo_comgents', on_delete=models.CASCADE)
 
-    def get_absolute_url(self):
-        return reverse("blog:BlogList")

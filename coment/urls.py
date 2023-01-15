@@ -1,9 +1,12 @@
 from django.urls import path, include
-from .views import ComentsView
+from . import views
 from rest_framework import routers
-app_name='coment'
+
+
 router = routers.SimpleRouter()
-router.register('coment', ComentsView, basename='coments')
+router.register('', views.ComentView, basename='coments')
 urlpatterns = [
+    path('comment-unlike/<pk>/', views.ComentUnLikeView.as_view()),
+    path('comment-like/<pk>/', views.ComentLikeView.as_view()),
     path('', include(router.urls))
 ]

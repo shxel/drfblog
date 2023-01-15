@@ -1,11 +1,14 @@
 from django.urls import path, include
-from .views import profile, folow, UserView
+from . import views
 from rest_framework import routers
+
+
 router = routers.SimpleRouter()
-router.register('update', UserView, basename='update')
-app_name='account'
+router.register('', views.UserView, basename='users')
+
 urlpatterns = [
-    path('profiel/<pk>', profile, name='profile'),
-    path('folow/<pk>', folow, name='folow'),
+    path('folow/<pk>/', views.UserFolowView.as_view()),
+    path('notification/<pk>/', views.UserNotificationView.as_view()),
     path('', include(router.urls))
 ]
+
