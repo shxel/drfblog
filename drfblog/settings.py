@@ -62,12 +62,6 @@ WSGI_APPLICATION = 'drfblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'djongo',
-        # 'NAME': 'drfblog',
-        # 'USER': 'demodomo',
-        # 'PASSWORD': 'demodomo1234',
-        # 'HOST': 'mongodb://localhost:27017/drf',
-        # 'PORT': 27017 ,
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
 
