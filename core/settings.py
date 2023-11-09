@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'account',
-    'coment',
+    'comment',
     'rest_framework',
     'rest_framework_simplejwt',
     'django_filters',
@@ -36,29 +37,29 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'drfblog.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
-{
-'BACKEND': 'django.template.backends.django.DjangoTemplates',
-'DIRS': [BASE_DIR / 'templates'],
-'APP_DIRS': True,
-'OPTIONS': {
-'context_processors': [
-'django.template.context_processors.debug',
-'django.template.context_processors.request',
-'django.contrib.auth.context_processors.auth',
-'django.contrib.messages.context_processors.messages',
-],
-'libraries': {
-'staticfiles': 'django.templatetags.static',
-}
-},
-},
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR / 'templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        'libraries': {
+            'staticfiles': 'django.templatetags.static',
+        }
+        },
+    },
 ]
 
 
-WSGI_APPLICATION = 'drfblog.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -101,7 +102,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR , 'static')
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -130,8 +137,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Bahoz Project',
-    'DESCRIPTION': 'Bahoz project API documentation',
+    'TITLE': 'Blog Project',
+    'DESCRIPTION': 'Blog project API documentation',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
@@ -165,6 +172,6 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=180),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }

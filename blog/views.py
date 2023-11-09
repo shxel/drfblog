@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 
 class BlogView(ModelViewSet):
@@ -25,7 +26,7 @@ class BlogView(ModelViewSet):
         'author__name',
     ]
 
-    # seting permission for this view
+    # set permission for this view
     def get_permissions(self):
         if self.action in ['create',]:
             permission_classes = [IsAuthenticated]
@@ -42,13 +43,14 @@ class BlogLikeView(APIView):
     def get(self, request, pk, format=None):
         user = request.user
         blog = Blog.objects.get(id=pk)
+        message = 'error'
         if blog != None:
             if user not in blog.likes.all():
                 blog.likes.add(user)
                 message = 'You liked this blog'
             else:
                 blog.likes.remove(user)
-                message = 'You unliked this blog'
+                message = 'You un liked this blog'
         else:
             message = 'not find'
         return Response({'message':message})
@@ -60,14 +62,15 @@ class BlogSavedView(APIView):
     def get(self, request, pk, format=None):
         user = request.user
         blog = Blog.objects.get(id=pk)
-        if blog != None :
+        message = 'error'
+        if blog != None:
             if user not in blog.saved.all():
                 blog.saved.add(user)
                 message = 'You saved this blog'
             else:
                 blog.saved.remove(user)
-                message = 'You saved this blog'
+                message = 'You un saved this blog'
         else:
             message = 'not find'
-        return Response({'massage':massage})
+        return Response({'massage':message})
 

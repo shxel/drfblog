@@ -4,7 +4,7 @@ from rest_framework import routers
 
 
 router = routers.SimpleRouter()
-router.register('', views.BlogView, basename='blogs')
+router.register('blog', views.BlogView, basename='blogs')
 
 urlpatterns = [
     path('like/<pk>/', views.BlogLikeView.as_view()),

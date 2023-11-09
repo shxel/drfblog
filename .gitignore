@@ -12,6 +12,35 @@ __pycache__/
 .idea/
 
 
+# migrations 
+*/migrations/*
+!*/migrations/__init__.py
+
+# PyCache
+*/__pycache__/*
+*/*/__pycache__/*
+
+# database
+*.sqlite3
+
+# venv
+*env
+*Pipfile
+*Pipfile.lock
+
+# IDE
+*.vscode
+*.idea
+
+# uploads media
+media/*
+!media/default/
+
+# static files
+staticfiles/*
+
+
+
 ### Django ###
 *.log
 *.pot

@@ -5,7 +5,7 @@ from account.models import User
 class Blog(models.Model):
     title = models.CharField(max_length=50)
     body = models.TextField()
-    date = models.DateTimeField(auto_now_add=False)
+    date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='images')
     author = models.ForeignKey(User, verbose_name="Author",
         related_name='blog_author', on_delete=models.CASCADE)

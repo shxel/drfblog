@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Blog
+from .models import Comments
 
 
-class BlogSerializer(serializers.ModelSerializer):
+class CommentsSerializer(serializers.ModelSerializer):
     author = serializers.CurrentUserDefault()
     
 
@@ -10,9 +10,9 @@ class BlogSerializer(serializers.ModelSerializer):
         return str(instance.author.name)
 
     class Meta:
-        model = Blog
-        fields = ['author', 'id', 'image', 'title',
-                'saved', 'date',  'likes', 'body']
+        model = Comments
+        fields = ['reply', 'id', 'reply_to_reply', 'body',
+                'date', 'author',  'likes', 'un_likes', 'blog']
         extra_kwargs = {
                         'id':{'read_only':True},
                         'date':{'read_only':True},
